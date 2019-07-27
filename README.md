@@ -114,3 +114,17 @@ ccf92e03b74c
 f99c83448b82
 
 ```
+
+Exit the lab:
+
+```
+
+$ docker stack rm my_lab
+
+```
+
+```
+
+docker swarm leave --force
+
+```
