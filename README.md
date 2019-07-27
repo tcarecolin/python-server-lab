@@ -33,3 +33,9 @@ sh stopServer.sh
 
 ```
 
+View result :
+```
+
+curl http://localhost:4000
+
+```
