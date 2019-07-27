@@ -5,7 +5,7 @@ Use a local Build :
 
 ```
 
-docker run -d -p 4000:80 python-test:v0.1.0 &
+docker run -d -p 4000:80 python-server-test:v0.1.0 &
 
 ```
 
