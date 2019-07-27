@@ -1,6 +1,8 @@
 # python-server-test
 a dockerized python+redis simple server ready playground
 
+## Single instance application Run
+
 Use a local Build :
 
 ```
@@ -40,6 +42,8 @@ View result :
 $ curl http://localhost:4000
 
 ```
+
+## Multiple instance cluster with swarm
 
 Deploy a cluster of 10 containers using Swarm and Compose:
 
