@@ -54,6 +54,9 @@ $ docker swarm init --advertise-addr 127.0.0.1
 
 ```
 
+Start the application
+```
+
 $ docker stack deploy -c docker-compose.yml my-lab
 
 ```
