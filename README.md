@@ -190,3 +190,8 @@ see the joined nodes :
 $ docker node ls
 ```
 
+# Autmoatized swarm deploy
+```
+$ sh ./swarm.sh
+```
+
