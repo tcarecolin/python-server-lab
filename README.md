@@ -43,7 +43,7 @@ $ curl http://localhost:4000
 
 ```
 
-## Multiple instance cluster with swarm
+## Single host swarm deploy
 
 Deploy a cluster of 10 containers using Swarm and Compose:
 
@@ -125,6 +125,68 @@ $ docker stack rm my_lab
 
 ```
 
-docker swarm leave --force
+$ docker swarm leave --force
 
 ```
+
+
+## Multiple host cluster with swarm
+
+in this experience i played with swarm to deploy a cluster on several physical machines at home with old used laptops.
+
+Note: only 64bytes cpu architectures are suported (x86_64)
+
+Note: docker daemon can be controled by either systemd or systemctl depending on the OS your host is running.
+
+On each physical host, after a fresh install force daemon to startup a boot:
+```
+ $ sudo systemctl enable docker
+ $ sudo systemctl start docker
+
+```
+### Troubleshoot Helper :
+  Docker daemon logs:
+  ```
+  $ systemctl status docker
+  ```
+
+  daemon execution params:
+  ```
+  $ systemctl cat docker | grep ExecStart
+  ```
+
+  Docker service logs:
+  ```
+  $ journalctl -u docker
+  ```
+start the swarm on the master :
+```
+
+$ docker swarm init --advertise-addr <MANAGER_HOST_IP>
+Swarm initialized: current node (jjaxo2cloezyvje1x24fkzxai) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-<SWARM_TOKEN> <MANAGER_HOST_IP>:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
+```
+
+On each worker execute the join command :
+```
+$ docker swarm join --token SWMTKN-1-<SWARM_TOKEN> <MANAGER_HOST_IP>:2377
+```
+
+Start the application :
+```
+
+$ docker stack deploy -c docker-compose.yml my-lab
+```
+
+see the joined nodes :
+```
+
+$ docker node ls
+```
+
